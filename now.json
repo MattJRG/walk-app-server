@@ -1,5 +1,4 @@
 {
-  "name": "walk-app-v1",
   "version": 2,
   "builds": [
     { "src": "index.js", 

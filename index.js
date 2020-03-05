@@ -1,7 +1,7 @@
 const express = require('express'); 
 // get rid of cors errors
 const cors = require('cors');
-// const rateLimit = require('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 const app = express();
 
 app.use(cors());
@@ -9,15 +9,20 @@ app.use(cors());
 // body parser middleware any income requests that has a content type of application json will be added to the body so we can access e.g. req.body
 app.use(express.json());
 
+app.use(rateLimit({
+  windowMs: 1000, // 1 per second
+  max: 1
+}));
+
 app.get('/', (req, res) => {
   res.json({
-    message: 'Hello there'
+    message: 'Hello there, Hermes at your service'
   })
 });
 
 app.get('/calcWalks', (req, res) => {
   res.json({
-    message: 'Please submit your walks to this URL using a post request :). Have a nice day - Hermes'
+    message: 'Please submit your walks to this URL using a post request. Have a nice day - Hermes'
   })
 });
 
@@ -82,11 +87,6 @@ checkIfSameGroupsAsBefore = (walkerGroups) => {
     return true;
   }
 }
-
-// app.use(rateLimit({
-//   windowMs: 1000, // 1 per second
-//   max: 1
-// }));
 
 app.listen(5000, () => {
   console.log('Listening on http://localhost:5000');
