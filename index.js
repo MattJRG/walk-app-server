@@ -15,6 +15,12 @@ app.get('/', (req, res) => {
   })
 });
 
+app.get('/calcWalks', (req, res) => {
+  res.json({
+    message: 'Please submit your walks to this URL using a post request :). Have a nice day - Hermes'
+  })
+});
+
 app.post('/calcWalks', (req, res) => {
   // Interperate request and create groups
   let walkerGroups = defineWalkGroups(req);
